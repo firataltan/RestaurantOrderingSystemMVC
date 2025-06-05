@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Restoran Sipariş Sistemi</h1>
+    <p class="lead">Masanızdan kolayca sipariş verin!</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-grid-3x3 display-1 text-primary"></i>
+                <h5 class="card-title">Masa Seçimi</h5>
+                <p class="card-text">Oturacağınız masayı seçin ve sipariş vermeye başlayın.</p>
+                <a asp-controller="Table" asp-action="Select" class="btn btn-primary">
+                    <i class="bi bi-arrow-right"></i> Masa Seç
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-list-ul display-1 text-success"></i>
+                <h5 class="card-title">Menü</h5>
+                <p class="card-text">Lezzetli yemeklerimizi ve içeceklerimizi keşfedin.</p>
+                <a asp-controller="Menu" asp-action="Index" class="btn btn-success">
+                    <i class="bi bi-eye"></i> Menüyü Görüntüle
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-clock-history display-1 text-info"></i>
+                <h5 class="card-title">Siparişlerim</h5>
+                <p class="card-text">Verdiğiniz siparişlerin durumunu takip edin.</p>
+                <a asp-controller="Order" asp-action="History" class="btn btn-info">
+                    <i class="bi bi-search"></i> Siparişleri Görüntüle
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Context.Session.GetInt32("TableId") != null)
+{
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-info d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle me-2"></i>
+                <div>
+                    <strong>Masa @Context.Session.GetInt32("TableId")</strong> için oturum açtınız.
+                    <a asp-controller="Order" asp-action="Create" class="alert-link">Hemen sipariş vermek için tıklayın!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,40 @@
+/* Özel stiller */
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.table-card {
+    transition: all 0.3s ease;
+}
+
+    .table-card:hover {
+        transform: scale(1.02);
+    }
+
+.order-card {
+    transition: all 0.3s ease;
+}
+
+.sticky-top {
+    top: 20px !important;
+}
+
+/* Toast container */
+.toast-container {
+    z-index: 1055;
+}
+
+/* Kitchen order cards */
+.order-card .card {
+    transition: border-color 0.3s ease;
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+    .sticky-top {
+        position: relative !important;
+        top: 0 !important;
+    }
+}
