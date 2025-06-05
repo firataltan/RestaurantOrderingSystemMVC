@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Admin Paneli";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h2><i class="bi bi-gear"></i> Admin Paneli</h2>
+        <p class="text-muted">Restoran yönetim sistemi</p>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-grid-3x3 display-1 text-primary"></i>
+                <h5 class="card-title">Masa Yönetimi</h5>
+                <p class="card-text">Masaları yönetin, garson ataması yapın.</p>
+                <a asp-action="TableLayout" class="btn btn-primary">
+                    <i class="bi bi-table"></i> Masa Düzeni
+                </a>
+                <a asp-action="Tables" class="btn btn-outline-primary">
+                    <i class="bi bi-list"></i> Masa Listesi
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-people display-1 text-success"></i>
+                <h5 class="card-title">Garson Yönetimi</h5>
+                <p class="card-text">Garsonları yönetin, atamalarını kontrol edin.</p>
+                <a asp-action="Servers" class="btn btn-success">
+                    <i class="bi bi-person-lines-fill"></i> Garsonlar
+                </a>
+                <a asp-action="CreateServer" class="btn btn-outline-success">
+                    <i class="bi bi-person-plus"></i> Yeni Garson
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-graph-up display-1 text-info"></i>
+                <h5 class="card-title">Raporlar</h5>
+                <p class="card-text">Satış raporları ve istatistikler.</p>
+                <a href="#" class="btn btn-info">
+                    <i class="bi bi-file-earmark-bar-graph"></i> Raporları Görüntüle
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

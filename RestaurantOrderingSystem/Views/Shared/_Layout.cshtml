@@ -47,6 +47,11 @@
                                 <i class="bi bi-chef-hat"></i> Mutfak
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">
+                                <i class="bi bi-gear"></i> Admin
+                            </a>
+                        </li>
                     </ul>
                     <div class="navbar-nav">
                         @if (Context.Session.GetInt32("TableId") != null)

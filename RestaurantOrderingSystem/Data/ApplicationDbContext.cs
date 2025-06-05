@@ -15,6 +15,7 @@ namespace RestaurantOrderingSystem.Data
         public DbSet<Table> Tables { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Server> Servers { get; set; } // YENİ EKLENEN
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,6 +52,12 @@ namespace RestaurantOrderingSystem.Data
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.Number).IsRequired().HasMaxLength(20);
                 entity.HasIndex(e => e.Number).IsUnique();
+
+                // YENİ: Table-Server Relationship
+                entity.HasOne(e => e.Server)
+                      .WithMany(s => s.AssignedTables)
+                      .HasForeignKey(e => e.ServerId)
+                      .OnDelete(DeleteBehavior.SetNull);
             });
 
             // Order Configuration
@@ -86,6 +93,17 @@ namespace RestaurantOrderingSystem.Data
                       .OnDelete(DeleteBehavior.Restrict);
             });
 
+            // YENİ: Server Configuration
+            modelBuilder.Entity<Server>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FirstName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.LastName).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.EmployeeCode).HasMaxLength(50);
+                entity.Property(e => e.PhoneNumber).HasMaxLength(20);
+                entity.HasIndex(e => e.EmployeeCode).IsUnique(); // Personel kodu unique olmalı
+            });
+
             // Seed Data
             SeedData(modelBuilder);
         }
@@ -100,13 +118,20 @@ namespace RestaurantOrderingSystem.Data
                 new Category { Id = 4, Name = "Tatlılar", Description = "Tatlı çeşitleri", CreatedAt = DateTime.Now }
             );
 
-            // Tables
+            // YENİ: Servers (Önce garsonları ekle)
+            modelBuilder.Entity<Server>().HasData(
+                new Server { Id = 1, FirstName = "Ahmet", LastName = "Yılmaz", EmployeeCode = "SRV001", IsActive = true, HireDate = DateTime.Now },
+                new Server { Id = 2, FirstName = "Ayşe", LastName = "Kaya", EmployeeCode = "SRV002", IsActive = true, HireDate = DateTime.Now },
+                new Server { Id = 3, FirstName = "Mehmet", LastName = "Öz", EmployeeCode = "SRV003", IsActive = true, HireDate = DateTime.Now }
+            );
+
+            // Tables (Bazı masalara garson ataması yapıldı)
             modelBuilder.Entity<Table>().HasData(
-                new Table { Id = 1, Number = "Masa 1", Capacity = 4, CreatedAt = DateTime.Now },
-                new Table { Id = 2, Number = "Masa 2", Capacity = 4, CreatedAt = DateTime.Now },
-                new Table { Id = 3, Number = "Masa 3", Capacity = 6, CreatedAt = DateTime.Now },
-                new Table { Id = 4, Number = "Masa 4", Capacity = 2, CreatedAt = DateTime.Now },
-                new Table { Id = 5, Number = "Masa 5", Capacity = 8, CreatedAt = DateTime.Now }
+                new Table { Id = 1, Number = "Masa 1", Capacity = 4, CreatedAt = DateTime.Now, ServerId = 1 }, // Ahmet'e atandı
+                new Table { Id = 2, Number = "Masa 2", Capacity = 4, CreatedAt = DateTime.Now, ServerId = 1 }, // Ahmet'e atandı
+                new Table { Id = 3, Number = "Masa 3", Capacity = 6, CreatedAt = DateTime.Now, ServerId = 2 }, // Ayşe'ye atandı
+                new Table { Id = 4, Number = "Masa 4", Capacity = 2, CreatedAt = DateTime.Now, ServerId = 3 }, // Mehmet'e atandı
+                new Table { Id = 5, Number = "Masa 5", Capacity = 8, CreatedAt = DateTime.Now } // Atanmamış masa
             );
 
             // Menu Items

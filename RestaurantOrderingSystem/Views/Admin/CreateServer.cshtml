@@ -1,0 +1,72 @@
+﻿@model RestaurantOrderingSystem.Models.Entities.Server
+
+@{
+    ViewData["Title"] = "Yeni Garson Ekle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow">
+            <div class="card-header">
+                <h4><i class="bi bi-person-plus"></i> Yeni Garson Ekle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="CreateServer" method="post">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FirstName" class="form-label">Ad <span class="text-danger">*</span></label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Adı">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="LastName" class="form-label">Soyad <span class="text-danger">*</span></label>
+                            <input asp-for="LastName" class="form-control" placeholder="Soyadı">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="EmployeeCode" class="form-label">Personel Kodu</label>
+                            <input asp-for="EmployeeCode" class="form-control" placeholder="Örn: SRV001">
+                            <span asp-validation-for="EmployeeCode" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PhoneNumber" class="form-label">Telefon</label>
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="0555 555 55 55">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="HireDate" class="form-label">İşe Başlama Tarihi</label>
+                        <input asp-for="HireDate" type="date" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                        <span asp-validation-for="HireDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input asp-for="IsActive" class="form-check-input" checked>
+                        <label asp-for="IsActive" class="form-check-label">
+                            Aktif durumda
+                        </label>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a asp-action="Servers" class="btn btn-outline-secondary me-md-2">
+                            <i class="bi bi-arrow-left"></i> Geri
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-check"></i> Garson Ekle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

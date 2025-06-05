@@ -1,0 +1,83 @@
+﻿@model RestaurantOrderingSystem.Models.Entities.Table
+
+@{
+    ViewData["Title"] = "Masa Düzenle";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow">
+            <div class="card-header">
+                <h4><i class="bi bi-pencil"></i> @Model.Number - Düzenle</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="EditTable" method="post">
+                    <input asp-for="Id" type="hidden" />
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Number" class="form-label">Masa Numarası <span class="text-danger">*</span></label>
+                            <input asp-for="Number" class="form-control">
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Capacity" class="form-label">Kapasite <span class="text-danger">*</span></label>
+                            <input asp-for="Capacity" type="number" min="1" max="20" class="form-control">
+                            <span asp-validation-for="Capacity" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PositionX" class="form-label">X Pozisyonu</label>
+                            <input asp-for="PositionX" type="number" min="0" class="form-control">
+                            <small class="text-muted">Masa düzenindeki yatay konum</small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="PositionY" class="form-label">Y Pozisyonu</label>
+                            <input asp-for="PositionY" type="number" min="0" class="form-control">
+                            <small class="text-muted">Masa düzenindeki dikey konum</small>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Status" class="form-label">Masa Durumu</label>
+                        <select asp-for="Status" class="form-select">
+                            <option value="1">Müsait</option>
+                            <option value="2">Dolu</option>
+                            <option value="3">Rezerve</option>
+                            <option value="4">Temizleniyor</option>
+                            <option value="5">Servis Dışı</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Mevcut Durum</label>
+                        <div class="alert alert-info">
+                            <strong>Durum:</strong> @(Model.IsOccupied ? "Dolu" : "Boş")<br>
+                            @if (Model.OccupiedAt.HasValue)
+                            {
+                                <strong>İşgal Zamanı:</strong> @Model.OccupiedAt.Value.ToString("dd.MM.yyyy HH:mm")
+                            }
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a asp-action="Tables" class="btn btn-outline-secondary me-md-2">
+                            <i class="bi bi-arrow-left"></i> Geri
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check"></i> Güncelle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
