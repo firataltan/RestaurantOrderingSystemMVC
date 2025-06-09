@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using RestaurantOrderingSystem.Services;
 using RestaurantOrderingSystem.Models.Entities;
 using RestaurantOrderingSystem.Attributes;
+using Microsoft.AspNetCore.Hosting;
 
 namespace RestaurantOrderingSystem.Controllers
 {
@@ -10,16 +12,149 @@ namespace RestaurantOrderingSystem.Controllers
     {
         private readonly ITableService _tableService;
         private readonly IServerService _serverService;
+        private readonly IMenuService _menuService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AdminController(ITableService tableService, IServerService serverService)
+        public AdminController(ITableService tableService, IServerService serverService, IMenuService menuService, IWebHostEnvironment webHostEnvironment)
         {
             _tableService = tableService;
             _serverService = serverService;
+            _menuService = menuService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        // MENU YÖNETİMİ
+        public async Task<IActionResult> MenuItems()
+        {
+            var menuItems = await _menuService.GetMenuItemsAsync();
+            return View(menuItems);
+        }
+
+        public async Task<IActionResult> CreateMenuItem()
+        {
+            var categories = await _menuService.GetCategoriesAsync();
+            ViewBag.Categories = categories;
+            return View(new MenuItem());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateMenuItem(MenuItem menuItem, IFormFile? imageFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (imageFile != null)
+                {
+                    menuItem.ImageUrl = await SaveImage(imageFile);
+                }
+
+                await _menuService.CreateMenuItemAsync(menuItem);
+                TempData["Success"] = "Menü öğesi başarıyla eklendi!";
+                return RedirectToAction("MenuItems");
+            }
+
+            var categories = await _menuService.GetCategoriesAsync();
+            ViewBag.Categories = categories;
+            return View(menuItem);
+        }
+
+        public async Task<IActionResult> EditMenuItem(int id)
+        {
+            var menuItem = await _menuService.GetMenuItemByIdAsync(id);
+            if (menuItem == null)
+            {
+                return NotFound();
+            }
+
+            var categories = await _menuService.GetCategoriesAsync();
+            ViewBag.Categories = categories;
+            return View(menuItem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditMenuItem(MenuItem menuItem, IFormFile? imageFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (imageFile != null)
+                {
+                    menuItem.ImageUrl = await SaveImage(imageFile);
+                }
+                else
+                {
+                    // If no new image, retain the existing one from the database
+                    var existingMenuItem = await _menuService.GetMenuItemByIdAsync(menuItem.Id);
+                    menuItem.ImageUrl = existingMenuItem?.ImageUrl;
+                }
+
+                var result = await _menuService.UpdateMenuItemAsync(menuItem);
+                if (result)
+                {
+                    TempData["Success"] = "Menü öğesi başarıyla güncellendi!";
+                    return RedirectToAction("MenuItems");
+                }
+                else
+                {
+                    TempData["Error"] = "Menü öğesi güncellenemedi!";
+                }
+            }
+
+            var categories = await _menuService.GetCategoriesAsync();
+            ViewBag.Categories = categories;
+            return View(menuItem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteMenuItem(int id)
+        {
+            var result = await _menuService.DeleteMenuItemAsync(id);
+            if (result)
+            {
+                TempData["Success"] = "Menü öğesi başarıyla silindi!";
+            }
+            else
+            {
+                TempData["Error"] = "Menü öğesi silinemedi! Menü öğesi siparişlerde kullanılıyor olabilir.";
+            }
+            return RedirectToAction("MenuItems");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ToggleMenuItemAvailability(int id)
+        {
+            var result = await _menuService.ToggleMenuItemAvailabilityAsync(id);
+            return Json(new { success = result });
+        }
+
+        private async Task<string?> SaveImage(IFormFile imageFile)
+        {
+            if (imageFile == null || imageFile.Length == 0)
+            {
+                return null;
+            }
+
+            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "menuitems");
+            if (!Directory.Exists(uploadsFolder))
+            {
+                Directory.CreateDirectory(uploadsFolder);
+            }
+
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + imageFile.FileName;
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await imageFile.CopyToAsync(fileStream);
+            }
+
+            return "/images/menuitems/" + uniqueFileName;
         }
 
         // MASA YÖNETİMİ
@@ -38,6 +173,7 @@ namespace RestaurantOrderingSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignServer(int tableId, int serverId)
         {
             var result = await _tableService.AssignServerToTableAsync(tableId, serverId);
@@ -79,6 +215,7 @@ namespace RestaurantOrderingSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateServer(Server server)
         {
             if (ModelState.IsValid)
@@ -101,6 +238,7 @@ namespace RestaurantOrderingSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditServer(Server server)
         {
             if (ModelState.IsValid)
@@ -129,6 +267,7 @@ namespace RestaurantOrderingSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTable(Table table)
         {
             if (ModelState.IsValid)
@@ -151,6 +290,7 @@ namespace RestaurantOrderingSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditTable(Table table)
         {
             if (ModelState.IsValid)
@@ -172,6 +312,7 @@ namespace RestaurantOrderingSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteTable(int id)
         {
             var result = await _tableService.DeleteTableAsync(id);

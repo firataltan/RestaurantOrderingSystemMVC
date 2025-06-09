@@ -46,10 +46,26 @@
     <div class="col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
             <div class="card-body text-center">
-                <i class="bi bi-graph-up display-1 text-info"></i>
+                <i class="bi bi-list-ul display-1 text-info"></i>
+                <h5 class="card-title">Menü Yönetimi</h5>
+                <p class="card-text">Menü öğelerini yönetin, fiyatları güncelleyin.</p>
+                <a asp-action="MenuItems" class="btn btn-info">
+                    <i class="bi bi-list-check"></i> Menü Öğeleri
+                </a>
+                <a asp-action="CreateMenuItem" class="btn btn-outline-info">
+                    <i class="bi bi-plus-circle"></i> Yeni Öğe
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="bi bi-graph-up display-1 text-warning"></i>
                 <h5 class="card-title">Raporlar</h5>
                 <p class="card-text">Satış raporları ve istatistikler.</p>
-                <a href="#" class="btn btn-info">
+                <a href="#" class="btn btn-warning">
                     <i class="bi bi-file-earmark-bar-graph"></i> Raporları Görüntüle
                 </a>
             </div>
