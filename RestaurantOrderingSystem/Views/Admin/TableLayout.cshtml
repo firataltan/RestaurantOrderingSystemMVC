@@ -121,6 +121,9 @@
     </div>
 </div>
 
+@* Anti-forgery token for AJAX requests *@
+@Html.AntiForgeryToken()
+
 @section Scripts {
     <script src="~/js/table-layout.js"></script>
 }
@@ -135,7 +138,7 @@
             RestaurantOrderingSystem.Models.Entities.TableStatus.Reserved => "border-warning",
             RestaurantOrderingSystem.Models.Entities.TableStatus.Cleaning => "border-info",
             RestaurantOrderingSystem.Models.Entities.TableStatus.OutOfService => "border-secondary",
-            _ => "border-light"
+            _ => "border-dark"
         };
     }
 }
