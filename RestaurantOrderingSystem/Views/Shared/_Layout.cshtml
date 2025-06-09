@@ -54,12 +54,31 @@
                         </li>
                     </ul>
                     <div class="navbar-nav">
-                        @if (Context.Session.GetInt32("TableId") != null)
+                        @if (Context.Session.GetString("UserId") != null)
+                        {
+                            <span class="navbar-text me-3">
+                                <i class="bi bi-person-fill"></i>
+                                @Context.Session.GetString("FullName") 
+                                (@Context.Session.GetString("UserRole"))
+                            </span>
+                            <a class="nav-link" asp-controller="Auth" asp-action="Logout">
+                                <i class="bi bi-box-arrow-right"></i> Çıkış
+                            </a>
+                        }
+                        else if (Context.Session.GetInt32("TableId") != null)
                         {
                             <span class="navbar-text me-3">
                                 <i class="bi bi-geo-alt-fill text-warning"></i>
                                 Masa: @Context.Session.GetInt32("TableId")
                             </span>
+                            <div class="d-flex">
+                                <a class="nav-link me-2" asp-controller="Table" asp-action="Leave">
+                                    <i class="bi bi-box-arrow-right"></i> Masadan Ayrıl
+                                </a>
+                                <a class="nav-link" asp-controller="Auth" asp-action="Logout">
+                                    <i class="bi bi-box-arrow-right"></i> Çıkış
+                                </a>
+                            </div>
                         }
                     </div>
                 </div>

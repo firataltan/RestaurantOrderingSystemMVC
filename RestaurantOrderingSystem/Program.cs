@@ -15,12 +15,11 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Custom Services (BURAYA TAÞINDI - app.Build() öncesi)
+// Custom Services (BURAYA TAï¿½INDI - app.Build() ï¿½ncesi)
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ITableService, TableService>();
 builder.Services.AddScoped<IServerService, ServerService>();
-
 
 // Session Configuration
 builder.Services.AddSession(options =>
@@ -30,10 +29,16 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+// HttpContextAccessor
+builder.Services.AddHttpContextAccessor();
+
+// AuthService
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 // SignalR
 builder.Services.AddSignalR();
 
-// Razor Runtime Compilation (Development için)
+// Razor Runtime Compilation (Development iin)
 if (builder.Environment.IsDevelopment())
 {
     builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -70,11 +75,11 @@ using (var scope = app.Services.CreateScope())
     {
         context.Database.EnsureCreated();
         DbInitializer.Initialize(context);
-        logger.LogInformation("Veritabaný baþarýyla oluþturuldu ve baþlatýldý.");
+        logger.LogInformation("Veritabanï¿½ baï¿½arï¿½yla oluï¿½turuldu ve baï¿½latï¿½ldï¿½.");
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Veritabaný baþlatýlýrken bir hata oluþtu.");
+        logger.LogError(ex, "Veritabanï¿½ baï¿½latï¿½lï¿½rken bir hata oluï¿½tu.");
     }
 }
 

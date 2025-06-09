@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantOrderingSystem.Services;
 using RestaurantOrderingSystem.Models.Entities;
+using RestaurantOrderingSystem.Attributes;
 
 namespace RestaurantOrderingSystem.Controllers
 {
+    [RoleRequired(UserRole.Admin)]
     public class AdminController : Controller
     {
         private readonly ITableService _tableService;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestaurantOrderingSystem.Models.Entities;
+using RestaurantOrderingSystem.Services;
 
 namespace RestaurantOrderingSystem.Data
 {
@@ -16,6 +17,7 @@ namespace RestaurantOrderingSystem.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Server> Servers { get; set; } // YENİ EKLENEN
+        public DbSet<User> Users { get; set; } // YENİ EKLENEN
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -104,6 +106,24 @@ namespace RestaurantOrderingSystem.Data
                 entity.HasIndex(e => e.EmployeeCode).IsUnique(); // Personel kodu unique olmalı
             });
 
+            // YENİ: User Configuration
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Username).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Password).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.FullName).HasMaxLength(100);
+                entity.HasIndex(e => e.Username).IsUnique();
+                entity.HasIndex(e => e.Email).IsUnique();
+
+                // User-Table Relationship
+                entity.HasOne(e => e.CurrentTable)
+                      .WithMany()
+                      .HasForeignKey(e => e.CurrentTableId)
+                      .OnDelete(DeleteBehavior.SetNull);
+            });
+
             // Seed Data
             SeedData(modelBuilder);
         }
@@ -153,6 +173,41 @@ namespace RestaurantOrderingSystem.Data
                 // Tatlılar
                 new MenuItem { Id = 9, Name = "Baklava", Description = "Antep fıstıklı baklava", Price = 45.00m, CategoryId = 4, CreatedAt = DateTime.Now },
                 new MenuItem { Id = 10, Name = "Sütlaç", Description = "Ev yapımı sütlaç", Price = 35.00m, CategoryId = 4, CreatedAt = DateTime.Now }
+            );
+
+            // YENİ: Seed Users
+            var authService = new AuthService(this, null); // Geçici olarak null HttpContextAccessor
+            modelBuilder.Entity<User>().HasData(
+                new User 
+                { 
+                    Id = 1, 
+                    Username = "admin", 
+                    Password = authService.HashPassword("admin123"),
+                    Email = "admin@restaurant.com",
+                    FullName = "Sistem Yöneticisi",
+                    Role = UserRole.Admin,
+                    CreatedAt = DateTime.Now 
+                },
+                new User 
+                { 
+                    Id = 2, 
+                    Username = "kitchen", 
+                    Password = authService.HashPassword("kitchen123"),
+                    Email = "kitchen@restaurant.com", 
+                    FullName = "Mutfak Şefi",
+                    Role = UserRole.Kitchen,
+                    CreatedAt = DateTime.Now 
+                },
+                new User 
+                { 
+                    Id = 3, 
+                    Username = "user", 
+                    Password = authService.HashPassword("user123"),
+                    Email = "user@restaurant.com",
+                    FullName = "Test Kullanıcısı", 
+                    Role = UserRole.User,
+                    CreatedAt = DateTime.Now 
+                }
             );
         }
     }

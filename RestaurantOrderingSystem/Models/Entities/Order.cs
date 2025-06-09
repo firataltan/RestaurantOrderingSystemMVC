@@ -12,6 +12,8 @@ namespace RestaurantOrderingSystem.Models.Entities
 
         public DateTime OrderTime { get; set; } = DateTime.Now;
 
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
         [Required]
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
 

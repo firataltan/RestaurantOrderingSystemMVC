@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantOrderingSystem.Data;
 
@@ -11,9 +12,11 @@ using RestaurantOrderingSystem.Data;
 namespace RestaurantOrderingSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608224357_AddUserAuthenticationSystem")]
+    partial class AddUserAuthenticationSystem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,28 +56,28 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1670),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4569),
                             Description = "Sıcak çorbalar",
                             Name = "Çorbalar"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1673),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4571),
                             Description = "Ana yemek çeşitleri",
                             Name = "Ana Yemekler"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1674),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4573),
                             Description = "Sıcak ve soğuk içecekler",
                             Name = "İçecekler"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1677),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4574),
                             Description = "Tatlı çeşitleri",
                             Name = "Tatlılar"
                         });
@@ -127,7 +130,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1856),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4741),
                             Description = "Geleneksel mercimek çorbası",
                             IsAvailable = true,
                             Name = "Mercimek Çorbası",
@@ -137,7 +140,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1859),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4743),
                             Description = "Ev yapımı tavuk çorbası",
                             IsAvailable = true,
                             Name = "Tavuk Çorbası",
@@ -147,7 +150,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1861),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4745),
                             Description = "Baharatlarla marine edilmiş izgara tavuk",
                             IsAvailable = true,
                             Name = "Izgara Tavuk",
@@ -157,7 +160,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1863),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4747),
                             Description = "Ev yapımı köfte",
                             IsAvailable = true,
                             Name = "Köfte",
@@ -167,7 +170,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 5,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1865),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4749),
                             Description = "Günün taze balığı",
                             IsAvailable = true,
                             Name = "Balık Izgara",
@@ -177,7 +180,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 6,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1866),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4751),
                             Description = "Türk çayı",
                             IsAvailable = true,
                             Name = "Çay",
@@ -187,7 +190,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 7,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1868),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4752),
                             Description = "Türk kahvesi",
                             IsAvailable = true,
                             Name = "Kahve",
@@ -197,7 +200,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 8,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1870),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4754),
                             Description = "Soğuk kola",
                             IsAvailable = true,
                             Name = "Kola",
@@ -207,7 +210,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 9,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1872),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4755),
                             Description = "Antep fıstıklı baklava",
                             IsAvailable = true,
                             Name = "Baklava",
@@ -217,7 +220,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 10,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1874),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4757),
                             Description = "Ev yapımı sütlaç",
                             IsAvailable = true,
                             Name = "Sütlaç",
@@ -341,7 +344,7 @@ namespace RestaurantOrderingSystem.Migrations
                             Id = 1,
                             EmployeeCode = "SRV001",
                             FirstName = "Ahmet",
-                            HireDate = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1796),
+                            HireDate = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4684),
                             IsActive = true,
                             LastName = "Yılmaz"
                         },
@@ -350,7 +353,7 @@ namespace RestaurantOrderingSystem.Migrations
                             Id = 2,
                             EmployeeCode = "SRV002",
                             FirstName = "Ayşe",
-                            HireDate = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1799),
+                            HireDate = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4686),
                             IsActive = true,
                             LastName = "Kaya"
                         },
@@ -359,7 +362,7 @@ namespace RestaurantOrderingSystem.Migrations
                             Id = 3,
                             EmployeeCode = "SRV003",
                             FirstName = "Mehmet",
-                            HireDate = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1801),
+                            HireDate = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4688),
                             IsActive = true,
                             LastName = "Öz"
                         });
@@ -423,7 +426,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 1,
                             Capacity = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1822),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4708),
                             IsOccupied = false,
                             Number = "Masa 1",
                             PositionX = 0,
@@ -435,7 +438,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 2,
                             Capacity = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1825),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4711),
                             IsOccupied = false,
                             Number = "Masa 2",
                             PositionX = 0,
@@ -447,7 +450,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 3,
                             Capacity = 6,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1827),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4712),
                             IsOccupied = false,
                             Number = "Masa 3",
                             PositionX = 0,
@@ -459,7 +462,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 4,
                             Capacity = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1828),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4714),
                             IsOccupied = false,
                             Number = "Masa 4",
                             PositionX = 0,
@@ -471,7 +474,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 5,
                             Capacity = 8,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1830),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(4716),
                             IsOccupied = false,
                             Number = "Masa 5",
                             PositionX = 0,
@@ -538,7 +541,7 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(2114),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(5058),
                             Email = "admin@restaurant.com",
                             FullName = "Sistem Yöneticisi",
                             IsActive = true,
@@ -549,7 +552,7 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(2175),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(5077),
                             Email = "kitchen@restaurant.com",
                             FullName = "Mutfak Şefi",
                             IsActive = true,
@@ -560,7 +563,7 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(2192),
+                            CreatedAt = new DateTime(2025, 6, 9, 1, 43, 57, 343, DateTimeKind.Local).AddTicks(5092),
                             Email = "user@restaurant.com",
                             FullName = "Test Kullanıcısı",
                             IsActive = true,

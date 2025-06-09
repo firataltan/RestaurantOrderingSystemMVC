@@ -63,5 +63,13 @@ namespace RestaurantOrderingSystem.Controllers
             var isAvailable = await _tableService.IsTableAvailableAsync(tableId);
             return Json(new { isAvailable });
         }
+
+        public IActionResult Leave()
+        {
+            // Session'dan masa bilgisini temizle
+            HttpContext.Session.Remove("TableId");
+            TempData["Success"] = "Masadan başarıyla ayrıldınız.";
+            return RedirectToAction("Select");
+        }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RestaurantOrderingSystem.Data;
 
@@ -11,9 +12,11 @@ using RestaurantOrderingSystem.Data;
 namespace RestaurantOrderingSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250608231328_AddOrderHistory")]
+    partial class AddOrderHistory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,28 +56,28 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1670),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4158),
                             Description = "Sıcak çorbalar",
                             Name = "Çorbalar"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1673),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4160),
                             Description = "Ana yemek çeşitleri",
                             Name = "Ana Yemekler"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1674),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4162),
                             Description = "Sıcak ve soğuk içecekler",
                             Name = "İçecekler"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1677),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4164),
                             Description = "Tatlı çeşitleri",
                             Name = "Tatlılar"
                         });
@@ -127,7 +130,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1856),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4566),
                             Description = "Geleneksel mercimek çorbası",
                             IsAvailable = true,
                             Name = "Mercimek Çorbası",
@@ -137,7 +140,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1859),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4568),
                             Description = "Ev yapımı tavuk çorbası",
                             IsAvailable = true,
                             Name = "Tavuk Çorbası",
@@ -147,7 +150,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1861),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4570),
                             Description = "Baharatlarla marine edilmiş izgara tavuk",
                             IsAvailable = true,
                             Name = "Izgara Tavuk",
@@ -157,7 +160,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1863),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4573),
                             Description = "Ev yapımı köfte",
                             IsAvailable = true,
                             Name = "Köfte",
@@ -167,7 +170,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 5,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1865),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4624),
                             Description = "Günün taze balığı",
                             IsAvailable = true,
                             Name = "Balık Izgara",
@@ -177,7 +180,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 6,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1866),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4627),
                             Description = "Türk çayı",
                             IsAvailable = true,
                             Name = "Çay",
@@ -187,7 +190,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 7,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1868),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4628),
                             Description = "Türk kahvesi",
                             IsAvailable = true,
                             Name = "Kahve",
@@ -197,7 +200,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 8,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1870),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4630),
                             Description = "Soğuk kola",
                             IsAvailable = true,
                             Name = "Kola",
@@ -207,7 +210,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 9,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1872),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4631),
                             Description = "Antep fıstıklı baklava",
                             IsAvailable = true,
                             Name = "Baklava",
@@ -217,7 +220,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 10,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1874),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4633),
                             Description = "Ev yapımı sütlaç",
                             IsAvailable = true,
                             Name = "Sütlaç",
@@ -239,6 +242,12 @@ namespace RestaurantOrderingSystem.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("OrderTime")
                         .HasColumnType("datetime2");
 
@@ -253,13 +262,91 @@ namespace RestaurantOrderingSystem.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalAmount")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("TableId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.OrderHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AnonymousId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TableId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TableId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrderHistories");
+                });
+
+            modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.OrderHistoryItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MenuItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderHistoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpecialInstructions")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MenuItemId");
+
+                    b.HasIndex("OrderHistoryId");
+
+                    b.ToTable("OrderHistoryItems");
                 });
 
             modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.OrderItem", b =>
@@ -341,7 +428,7 @@ namespace RestaurantOrderingSystem.Migrations
                             Id = 1,
                             EmployeeCode = "SRV001",
                             FirstName = "Ahmet",
-                            HireDate = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1796),
+                            HireDate = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4484),
                             IsActive = true,
                             LastName = "Yılmaz"
                         },
@@ -350,7 +437,7 @@ namespace RestaurantOrderingSystem.Migrations
                             Id = 2,
                             EmployeeCode = "SRV002",
                             FirstName = "Ayşe",
-                            HireDate = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1799),
+                            HireDate = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4487),
                             IsActive = true,
                             LastName = "Kaya"
                         },
@@ -359,7 +446,7 @@ namespace RestaurantOrderingSystem.Migrations
                             Id = 3,
                             EmployeeCode = "SRV003",
                             FirstName = "Mehmet",
-                            HireDate = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1801),
+                            HireDate = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4488),
                             IsActive = true,
                             LastName = "Öz"
                         });
@@ -423,7 +510,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 1,
                             Capacity = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1822),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4525),
                             IsOccupied = false,
                             Number = "Masa 1",
                             PositionX = 0,
@@ -435,7 +522,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 2,
                             Capacity = 4,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1825),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4527),
                             IsOccupied = false,
                             Number = "Masa 2",
                             PositionX = 0,
@@ -447,7 +534,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 3,
                             Capacity = 6,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1827),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4529),
                             IsOccupied = false,
                             Number = "Masa 3",
                             PositionX = 0,
@@ -459,7 +546,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 4,
                             Capacity = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1828),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4531),
                             IsOccupied = false,
                             Number = "Masa 4",
                             PositionX = 0,
@@ -471,7 +558,7 @@ namespace RestaurantOrderingSystem.Migrations
                         {
                             Id = 5,
                             Capacity = 8,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(1830),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(4532),
                             IsOccupied = false,
                             Number = "Masa 5",
                             PositionX = 0,
@@ -538,7 +625,7 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(2114),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(5108),
                             Email = "admin@restaurant.com",
                             FullName = "Sistem Yöneticisi",
                             IsActive = true,
@@ -549,7 +636,7 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(2175),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(5134),
                             Email = "kitchen@restaurant.com",
                             FullName = "Mutfak Şefi",
                             IsActive = true,
@@ -560,7 +647,7 @@ namespace RestaurantOrderingSystem.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2025, 6, 9, 2, 31, 57, 161, DateTimeKind.Local).AddTicks(2192),
+                            CreatedAt = new DateTime(2025, 6, 9, 2, 13, 28, 226, DateTimeKind.Local).AddTicks(5151),
                             Email = "user@restaurant.com",
                             FullName = "Test Kullanıcısı",
                             IsActive = true,
@@ -589,7 +676,51 @@ namespace RestaurantOrderingSystem.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("RestaurantOrderingSystem.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.Navigation("Table");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.OrderHistory", b =>
+                {
+                    b.HasOne("RestaurantOrderingSystem.Models.Entities.Table", "Table")
+                        .WithMany()
+                        .HasForeignKey("TableId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("RestaurantOrderingSystem.Models.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Table");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.OrderHistoryItem", b =>
+                {
+                    b.HasOne("RestaurantOrderingSystem.Models.Entities.MenuItem", "MenuItem")
+                        .WithMany()
+                        .HasForeignKey("MenuItemId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("RestaurantOrderingSystem.Models.Entities.OrderHistory", "OrderHistory")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderHistoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuItem");
+
+                    b.Navigation("OrderHistory");
                 });
 
             modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.OrderItem", b =>
@@ -644,6 +775,11 @@ namespace RestaurantOrderingSystem.Migrations
             modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
+
+            modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.OrderHistory", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("RestaurantOrderingSystem.Models.Entities.Server", b =>

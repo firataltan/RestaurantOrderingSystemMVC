@@ -1,0 +1,103 @@
+@model IEnumerable<Order>
+@using RestaurantOrderingSystem.Models.Entities
+@using RestaurantOrderingSystem.Services
+@inject IAuthService AuthService
+
+@{
+    ViewData["Title"] = "Siparişler";
+    var currentUser = await AuthService.GetCurrentUserAsync();
+    var isKitchenOrAdmin = currentUser?.Role == UserRole.Kitchen || currentUser?.Role == UserRole.Admin;
+}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Aktif Siparişler</h2>
+        <div>
+            <a asp-controller="Auth" asp-action="Logout" class="btn btn-danger">
+                <i class="bi bi-box-arrow-right"></i> Çıkış Yap
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var order in Model)
+        {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">
+                            Masa @order.Table.Number
+                            <span class="badge bg-primary float-end">@order.Status</span>
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var item in order.OrderItems)
+                            {
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    @item.MenuItem.Name
+                                    <span class="badge bg-secondary rounded-pill">@item.Quantity</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            Sipariş Zamanı: @order.CreatedAt.ToString("HH:mm")
+                        </small>
+                        @if (isKitchenOrAdmin)
+                        {
+                            <div class="mt-2">
+                                <div class="btn-group w-100">
+                                    <button class="btn btn-sm btn-warning" onclick="updateOrderStatus(@order.Id, @((int)OrderStatus.Preparing))">
+                                        Hazırlanıyor
+                                    </button>
+                                    <button class="btn btn-sm btn-success" onclick="updateOrderStatus(@order.Id, @((int)OrderStatus.Ready))">
+                                        Hazır
+                                    </button>
+                                    <button class="btn btn-sm btn-info" onclick="updateOrderStatus(@order.Id, @((int)OrderStatus.Served))">
+                                        Servis Edildi
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function updateOrderStatus(orderId, status) {
+            if (!@isKitchenOrAdmin.ToString().ToLower()) {
+                alert('Bu işlem için yetkiniz bulunmamaktadır.');
+                return;
+            }
+
+            fetch('/Kitchen/UpdateStatus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    orderId: orderId,
+                    status: status
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Sipariş durumu güncellenirken bir hata oluştu.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Bir hata oluştu.');
+            });
+        }
+    </script>
+} 

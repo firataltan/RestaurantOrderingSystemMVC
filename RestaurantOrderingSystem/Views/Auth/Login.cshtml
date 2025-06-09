@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Giriş Yap";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-header text-center">
+                <h4><i class="bi bi-person-circle"></i> Restoran Sistemi</h4>
+            </div>
+            <div class="card-body">
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["Error"]
+                    </div>
+                }
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success">
+                        @TempData["Success"]
+                    </div>
+                }
+
+                <form asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Kullanıcı Adı</label>
+                        <input type="text" class="form-control" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Şifre</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-box-arrow-in-right"></i> Giriş Yap
+                        </button>
+                    </div>
+                </form>
+                
+                <hr>
+                <div class="text-center">
+                    <small class="text-muted">Demo Hesapları:</small><br>
+                    <small><strong>Admin:</strong> admin / admin123</small><br>
+                    <small><strong>Mutfak:</strong> kitchen / kitchen123</small><br>
+                    <small><strong>Müşteri:</strong> user / user123</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
